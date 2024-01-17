@@ -4,15 +4,15 @@
 #include <stdbool.h>
 
 typedef struct Arc{
-	int sommetA, sommetB;
 	bool arc; 
 	int valuation;
 }Arc;
 
-typedef struct graphe{
-	Arc ** arc;
-}graphe;
+typedef struct Graphe{	
+	Arc ** matrice;
+	int * nomSommet;
+	int tailleGraphe;
+}Graphe;
 
 
 #endif
-
