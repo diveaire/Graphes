@@ -4,7 +4,7 @@
 
 #include "header/parcoursGraphe.h"
 
-void BFS(Graphe *graphe, int sommetDepart){
+void BFS(Graphe * graphe, int sommetDepart){
     // Tableau pour marquer les sommets visités
     bool visite[graphe->tailleGraphe];
     for (int i = 0; i < graphe->tailleGraphe; i++) {
@@ -31,11 +31,10 @@ void BFS(Graphe *graphe, int sommetDepart){
             }
         }
     }
-
     free(file);
 }
 
-void DFSRecursif(Graphe *graphe, int sommet, bool visite[]){
+void DFSRecursif(Graphe * graphe, int sommet, bool visite[]){
     visite[sommet] = true;
     printf("%d ", sommet);
 
@@ -47,7 +46,7 @@ void DFSRecursif(Graphe *graphe, int sommet, bool visite[]){
     }
 }
 
-void DFS(Graphe *graphe, int sommetDepart){
+void DFS(Graphe * graphe, int sommetDepart){
     // Tableau pour marquer les sommets visités
     bool visite[graphe->tailleGraphe];
     for (int i = 0; i < graphe->tailleGraphe; i++) {

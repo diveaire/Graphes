@@ -9,19 +9,22 @@ typedef struct Arc{
 }Arc;
 
 typedef struct Graphe{	
+	char * nom;
 	Arc ** matrice;
 	int * nomSommet;
 	int tailleGraphe;
 }Graphe;
 
 /* Graphes */
-Graphe * initGraphe(void);
+Graphe * initGraphe(char * nom);
+Graphe * genererGrapheAleatoire(char * nom, int nombreSommets, int nombreAretes);
 int viderGraphe(Graphe * monGraphe);
 void freeGraphe(Graphe * monGraphe);
 int ajoutSommet(Graphe * monGraphe, int nom);
-int ajouterArc(Graphe * monGraphe, int indiceA, int indiceB, int valuation);
-void supprimerArc(Graphe * monGraphe, int indiceA, int indiceB);
+int ajouterArc(Graphe * monGraphe, int sommetA, int sommetB, int valuation);
+int supprimerArc(Graphe * monGraphe, int sommetA, int sommetB);
 int indiceSommet(Graphe * monGraphe, int sommet);
+Graphe * sousGrapheInduit(char * nom, Graphe *grapheOriginal, bool sommetsInclus[]);
 
 
 #endif

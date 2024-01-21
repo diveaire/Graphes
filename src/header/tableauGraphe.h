@@ -4,8 +4,7 @@
 #include "graphe.h"
 
 Graphe ** initTabGraphe();
-int ajoutGraphe(Graphe *** tabGraphe);
+int ajoutGraphe(Graphe *** tabGraphe, char * nom);
 void freeTabGraphe(Graphe ** tabGraphe);
-
 
 #endif

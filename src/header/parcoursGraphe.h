@@ -3,9 +3,9 @@
 
 #include "graphe.h"
 
-void BFS(Graphe *graphe, int sommetDepart);
-void DFSUtil(Graphe *graphe, int sommet, bool visite[]);
-void DFS(Graphe *graphe, int sommetDepart);
+void BFS(Graphe * graphe, int sommetDepart);
+void DFSUtil(Graphe * graphe, int sommet, bool visite[]);
+void DFS(Graphe * graphe, int sommetDepart);
 
 
 #endif

@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include "header/tableauGraphe.h"
 
-Graphe **initTabGraphe(){
-    Graphe **tableauDeGraphes = malloc(sizeof(Graphe *));
+Graphe ** initTabGraphe(){
+    Graphe ** tableauDeGraphes = malloc(sizeof(Graphe *));
     if (tableauDeGraphes == NULL) {
         printf("Échec de l'allocation de mémoire pour le tableau de graphes.\n");
         return NULL;
@@ -13,19 +13,19 @@ Graphe **initTabGraphe(){
     return tableauDeGraphes;
 }
 
-int ajoutGraphe(Graphe ***tabGraphe){
+int ajoutGraphe(Graphe *** tabGraphe, char * nom){
     int taille = 0;
     while ((*tabGraphe)[taille] != NULL) taille++;
 
     // Redimensionnement du tableau pour accueillir un nouveau graphe
-    Graphe **nouveauTab = realloc(*tabGraphe, (taille + 2) * sizeof(Graphe *));
+    Graphe ** nouveauTab = realloc(*tabGraphe, (taille + 2) * sizeof(Graphe *));
     if (nouveauTab == NULL) {
         printf("Échec du redimensionnement du tableau de graphes.\n");
         return -1; // Retourner -1 en cas d'échec
     }
 
     *tabGraphe = nouveauTab;
-    (*tabGraphe)[taille] = initGraphe(); // Ajouter le nouveau graphe
+    (*tabGraphe)[taille] = initGraphe(nom); // Ajouter le nouveau graphe
     if ((*tabGraphe)[taille] == NULL) {
         printf("Échec de l'initialisation du nouveau graphe.\n");
         return -1;
@@ -36,7 +36,7 @@ int ajoutGraphe(Graphe ***tabGraphe){
     return taille; // Retourner l'indice du nouveau graphe
 }
 
-void freeTabGraphe(Graphe **tabGraphe){
+void freeTabGraphe(Graphe ** tabGraphe){
     if (tabGraphe == NULL) {
         return; // Si le tableau est déjà NULL, il n'y a rien à libérer
     }
