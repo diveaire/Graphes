@@ -22,8 +22,7 @@ int main(void){
             nb=rand() % 3; // Une chance sur 3 de d'ajouter l'arc
         }
     }
-
-    Graphe * monGraphe2 = genererGrapheAleatoire(" monGraphe2 ",20,40);
+    Graphe * monGraphe2 = genererGrapheAleatoire(" monGraphe2 ",100,500);
     afficherGraphe(monGraphe);
     afficherGraphe(monGraphe2);
 

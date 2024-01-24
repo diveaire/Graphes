@@ -1,5 +1,5 @@
-#if !defined(OUTIL)
-#define OUTIL
+#if !defined(__OUTIL__)
+#define __OUTIL__
 
 void cls(void);
 int get_terminal_width();
