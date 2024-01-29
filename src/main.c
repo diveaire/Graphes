@@ -6,29 +6,43 @@
 #include "header/graphe.h"
 #include "header/afficheGraphe.h"
 #include "header/parcoursGraphe.h"
+#include "header/serialization.h"
+#include "header/connexe.h"
 
 int main(void){
     srand(time(NULL));
 
     Graphe  * monGraphe = initGraphe(" monGraphe ");
-    printf("INIT OK\n");
 
-    for (int nom=100;nom>=90;nom--){
+    for (int i=0,nom=100;nom>=90;i++,nom--){
         ajoutSommet(monGraphe,nom);
-        //printf("Nom sommet : %d -- Taille Graphe : %d\n",monGraphe->nomSommet[i], monGraphe->tailleGraphe);
-        int nb=rand() % 3; // Une chance sur 3 de d'ajouter l'arc
-        for (int i=0;i<monGraphe->tailleGraphe-1 && !nb ;i++){
-            ajouterArc(monGraphe,nom,nom+i,rand());
-            nb=rand() % 3; // Une chance sur 3 de d'ajouter l'arc
+        printf("Nom sommet : %d -- Taille Graphe : %d\n",monGraphe->nomSommet[i], monGraphe->tailleGraphe);
+        if (nom < 100){
+            ajouterArc(monGraphe,nom,nom+1,0);
         }
     }
-    Graphe * monGraphe2 = genererGrapheAleatoire(" monGraphe2 ",100,500);
     afficherGraphe(monGraphe);
+
+
+    printf("genererGrapheAleatoire\n");
+    Graphe * monGraphe2 = genererGrapheAleatoire(" monGraphe2 ",100,500);
     afficherGraphe(monGraphe2);
 
+
+    printf("Importation CSV\n");
+    Graphe * monGraphe3 = importerGrapheCSV("graphefichier");
+    afficherGraphe(monGraphe3);
+
+
     /* Parcours */
-    BFS(monGraphe, monGraphe->nomSommet[0]);
-    DFS(monGraphe, monGraphe->nomSommet[0]);
+    printf("PARCOURS\n");
+    BFS(monGraphe3);
+    printf("\n");
+    DFS(monGraphe3);
+
+    /* composantes fortement connexe */
+    printf("\nComposantesFortementConnexes\n");
+    ComposantesFortementConnexes(monGraphe3);
 
 
     // Libération de la mémoire allouée pour le graphe

@@ -4,7 +4,6 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 #include <string.h>
-#include <math.h>
 #include <sys/wait.h>
 
 // Fonction qui utilise les séquences d'échappement ANSI pour effacer l'écran
@@ -70,7 +69,7 @@ int getMultChoice(int* resultat, int choixMax) {
     }
 
     *resultat = 0;
-    for (int i = 0; i < strlen(choix); ++i) {
+    for (int i = 0; i < (int) strlen(choix); ++i) {
         if (choix[i] >= 'a' && choix[i] <= caractereMax) {
             *resultat |= 1 << (choix[i] - 'a');
         } else {
@@ -92,7 +91,7 @@ char* ChaineSecurisee(char* interdits, int maxSize){
     while(test)
     {
         scanf("%s", chaine);
-        for (int i = 0; i < strlen(interdits); ++i) {
+        for (int i = 0; i < (int) strlen(interdits); ++i) {
             if (strchr(chaine, interdits[i]) != NULL) {
                 printf("La chaîne contient des caractères interdits. Veuillez réessayer.\n");
                 break;

@@ -4,5 +4,6 @@
 #include "graphe.h"
 
 void exporterGrapheCSV(Graphe * graphe, char * nomFichier);
+Graphe * importerGrapheCSV(char * nomFichier);
 
 #endif

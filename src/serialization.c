@@ -30,8 +30,8 @@ void exporterGrapheCSV(Graphe * graphe, char * nomFichier){
 
 // Permet d'importer un graphe en format CSV sous la forme SommetA;SommetB;Valuation
 Graphe * importerGrapheCSV(char * nomFichier) {
-    char chemin[128] = "/files/";
-    sprintf(chemin,"%s", nomFichier);
+    char chemin[128];
+    sprintf(chemin,"files/%s",nomFichier);
     FILE * fichier = fopen(chemin, "r");
     if (fichier == NULL) {
         perror("Erreur lors de l'ouverture du fichier\n");

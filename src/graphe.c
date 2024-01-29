@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+
 #include "header/graphe.h"
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
@@ -186,18 +187,19 @@ Graphe * genererGrapheAleatoire(char * nom, int nombreSommets, int nombreAretes)
 
     // Ajout des sommets
     for (int i = 0; i < nombreSommets; i++) {
-        ajoutSommet(graphe, i+1); // Remplacez par votre méthode d'ajout de sommet
+        ajoutSommet(graphe, i+1);
     }
 
     // Ajout des arêtes
     for (int i = 0; i < nombreAretes; i++) {
-        int sommetA = rand() % nombreSommets;
-        int sommetB = rand() % nombreSommets;
-        int valuation = rand() % 100; // Générer une valuation aléatoire, par exemple entre 0 et 99
+        int sommetA = (rand() % (nombreSommets-1))+1;
+        int sommetB = (rand() % (nombreSommets-1))+1;
+        int valuation = rand() % 100; // Générer une valuation aléatoire, entre 0 et 99
 
         // Vérifier si une arête existe déjà entre sommetA et sommetB, si non, l'ajouter
+        //printf("Ajout d'un arc entre %d(%d) et %d(%d)\n", sommetA,indiceSommet(graphe,sommetA), sommetB,indiceSommet(graphe,sommetB));
         if (!graphe->matrice[sommetA][sommetB].arc) {
-            ajouterArc(graphe, sommetA, sommetB, valuation); // Remplacez par votre méthode d'ajout d'arête
+            ajouterArc(graphe, sommetA, sommetB, valuation);
         } else {
             i--; // Décrémenter i pour compenser l'itération en cas d'arête déjà existante
         }

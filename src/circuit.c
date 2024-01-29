@@ -1,6 +1,5 @@
 
 #include "header/circuit.h"
-#include "header/graphe.h"
 
 
 bool estCircuit(Graphe * monGraphe, int * chemin, int taille){
