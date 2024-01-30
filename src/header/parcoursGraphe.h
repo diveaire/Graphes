@@ -3,8 +3,8 @@
 
 #include "graphe.h"
 
-void BFS(Graphe * graphe);
-void DFS(Graphe *graphe);
+void BFS(Graphe *graphe, int sommetDepart);
+void DFS(Graphe *graphe, int sommetDepart);
 
 
 #endif

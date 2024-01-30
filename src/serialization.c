@@ -11,7 +11,9 @@
 
 
 void exporterGrapheCSV(Graphe * graphe, char * nomFichier){
-    FILE * fichier = fopen(nomFichier, "w");
+    char chemin[128];
+    sprintf(chemin,"files/%s",nomFichier);
+    FILE * fichier = fopen(chemin, "w");
     if (fichier == NULL) {
         perror("Erreur lors de l'ouverture du fichier");
         return;
@@ -20,7 +22,7 @@ void exporterGrapheCSV(Graphe * graphe, char * nomFichier){
     for (int i = 0; i < graphe->tailleGraphe; i++) {
         for (int j = 0; j < graphe->tailleGraphe; j++) {
             if (graphe->matrice[i][j].arc) {
-                fprintf(fichier, "%d;%d;%d\n", i, j, graphe->matrice[i][j].valuation);
+                fprintf(fichier, "%d;%d;%d\n", graphe->nomSommet[i], graphe->nomSommet[j], graphe->matrice[i][j].valuation);
             }
         }
     }

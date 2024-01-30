@@ -1,5 +1,5 @@
-#if !defined(__CIRCUIT__)
-#define __CIRCUIT__
+#if !defined(__CONNEXE__)
+#define __CONNEXE__
 
 
 #include "graphe.h"

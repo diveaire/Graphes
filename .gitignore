@@ -7,7 +7,6 @@
 
 # Build
 /obj/*
-/files/*
 
 # Executables
 *.exe
