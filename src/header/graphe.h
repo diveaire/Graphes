@@ -27,7 +27,7 @@ int indiceSommet(Graphe * monGraphe, int sommet);
 int degreEntrant(Graphe *graphe, int sommet);
 int degreSortant(Graphe *graphe, int sommet);
 int grapheComplet(Graphe *graphe);
-Graphe * sousGrapheInduit(char * nom, Graphe *grapheOriginal, bool sommetsInclus[]);
-
+Graphe * sousGrapheInduit(char * nom, Graphe * grapheOriginal, int * inclure, int tailleInclure);
+Graphe * sousGraphePartiel(Graphe *grapheOriginal, bool ** aretesARetirer);
 
 #endif

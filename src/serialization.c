@@ -29,7 +29,7 @@ void exporterGrapheCSV(Graphe * graphe, char * nomFichier){
 
     fclose(fichier);
 }
-
+/*
 // Permet d'importer un graphe en format CSV sous la forme SommetA;SommetB;Valuation
 Graphe * importerGrapheCSV(char * nomFichier) {
     char chemin[128];
@@ -57,7 +57,43 @@ Graphe * importerGrapheCSV(char * nomFichier) {
             valuation = 0;  // ou une valeur par défaut de votre choix
         }
         ajouterArc(graphe, sommetA, sommetB, valuation);
-        printf("VALEUR AJOUTER ARC : SomA:%d SomB:%d Val:%d\n", sommetA, sommetB, valuation);
+        //printf("VALEUR AJOUTER ARC : SomA:%d SomB:%d Val:%d\n", sommetA, sommetB, valuation);
+    }
+
+    fclose(fichier);
+    return graphe;
+}
+*/
+Graphe *importerGrapheCSV(char *nomFichier) {
+    char chemin[128];
+    sprintf(chemin, "files/%s", nomFichier);
+    FILE *fichier = fopen(chemin, "r");
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        return NULL;
+    }
+
+    Graphe *graphe = initGraphe(nomFichier);
+    char ligne[128];
+
+    while (fgets(ligne, sizeof(ligne), fichier)) {
+        int sommetA, sommetB, valuation;
+        int resultat = sscanf(ligne, "%d;%d;%d", &sommetA, &sommetB, &valuation); // sscanf retourne le nombre d'élément assigné
+        if (resultat >= 1) { // Au moins un sommet est présent
+            if (indiceSommet(graphe, sommetA) == -1) {
+                ajoutSommet(graphe, sommetA);
+            }
+
+            if (resultat >= 2) { // Deux sommets sont présents, éventuellement une valuation
+                if (indiceSommet(graphe, sommetB) == -1) {
+                    ajoutSommet(graphe, sommetB);
+                }
+                if (resultat == 2) { // Pas de valuation spécifiée
+                    valuation = 0; // Utilisez une valuation par défaut
+                }
+                ajouterArc(graphe, sommetA, sommetB, valuation);
+            }
+        }
     }
 
     fclose(fichier);

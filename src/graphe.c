@@ -140,6 +140,7 @@ int ajouterArc(Graphe *monGraphe, int sommetA, int sommetB, int valuation){
 
     if (indiceA == -1 || indiceB == -1 || indiceB >= monGraphe->tailleGraphe) {
         printf("Indices de sommets invalides.\n");
+        printf("%d vers %d", sommetA, sommetB);
         return EXIT_FAILURE;
     }
 
@@ -232,60 +233,54 @@ int degreEntrant(Graphe *graphe, int sommet) {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------------- */
-/* --------------------------------------------------------- Degré --------------------------------------------------------- */
-/* ------------------------------------------------------------------------------------------------------------------------- */
-int grapheComplet(Graphe *graphe){
-    for (int iS=0; iS<graphe->tailleGraphe-1;iS++){
-        for (int iArc=0; iArc<graphe->tailleGraphe-1;iArc++){
-            if(iS!=iArc){
-                if(!graphe->matrice[iS][iArc].arc){
-                    return -1;
-                }
-            }
-        }        
-    }
-    return graphe->tailleGraphe;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------------- */
 /* ------------------------------------------------------ Sous Graphe ------------------------------------------------------ */
 /* ------------------------------------------------------------------------------------------------------------------------- */
 
-Graphe * sousGrapheInduit(char * nom, Graphe *grapheOriginal, bool sommetsInclus[]){
+Graphe * sousGrapheInduit(char * nom, Graphe * grapheOriginal, int * inclure, int tailleInclure) {
     Graphe * sousGraphe = initGraphe(nom); // Initialisez un nouveau graphe
-
-    // Ajouter les sommets au sous-graphe
-    for (int i = 0; i < grapheOriginal->tailleGraphe; i++) {
-        if (sommetsInclus[i]) {
-            ajoutSommet(sousGraphe, grapheOriginal->nomSommet[i]);
+    // Tableau pour garder la trace des indices des sommets inclus dans le sous-graphe
+    bool estInclus[grapheOriginal->tailleGraphe];
+    memset(estInclus, 0, sizeof(estInclus));
+    // Ajouter les sommets spécifiés au sous-graphe et marquer comme inclus
+    for (int i = 0; i < tailleInclure; i++) {
+        int sommet = inclure[i];
+        for (int j = 0; j < grapheOriginal->tailleGraphe; j++) {
+            if (grapheOriginal->nomSommet[j] == sommet) {
+                ajoutSommet(sousGraphe, sommet);
+                estInclus[j] = true; // Marquer ce sommet comme inclus
+                break; // Passer au prochain sommet à inclure une fois trouvé
+            }
         }
     }
-
     // Ajouter les arêtes au sous-graphe
     for (int i = 0; i < grapheOriginal->tailleGraphe; i++) {
         for (int j = 0; j < grapheOriginal->tailleGraphe; j++) {
-            if (sommetsInclus[i] && sommetsInclus[j] && grapheOriginal->matrice[i][j].arc) {
-                ajouterArc(sousGraphe, i, j, grapheOriginal->matrice[i][j].valuation);
+            if (estInclus[i] && estInclus[j] && grapheOriginal->matrice[i][j].arc) {
+                ajouterArc(sousGraphe, grapheOriginal->nomSommet[i], grapheOriginal->nomSommet[j], grapheOriginal->matrice[i][j].valuation);
             }
         }
     }
-
     return sousGraphe;
 }
-/*
-Graphe * sousGraphePartiel(Graphe *grapheOriginal, bool aretesARetirer[][TAILLE_MAX]) {
-    Graphe * sousGraphe = initGraphe(); // Initialisez un nouveau graphe avec les mêmes sommets que grapheOriginal
 
-    // Copier le graphe original dans le sous-graphe
+
+Graphe *sousGraphePartiel(Graphe *grapheOriginal, bool **aretesARetirer) {
+    Graphe *sousGraphe = initGraphe("Sous-Graphe Partiel"); // Initialise un nouveau graphe
+
+    // Copier les sommets du graphe original dans le sous-graphe
     for (int i = 0; i < grapheOriginal->tailleGraphe; i++) {
         ajoutSommet(sousGraphe, grapheOriginal->nomSommet[i]);
+    }
+
+    // Copier les arêtes du graphe original dans le sous-graphe, sauf celles à retirer
+    for (int i = 0; i < grapheOriginal->tailleGraphe; i++) {
         for (int j = 0; j < grapheOriginal->tailleGraphe; j++) {
-            if (grapheOriginal->matrice[i][j].arc && !aretesARetirer[i][j]) {
-                ajouterArc(sousGraphe, i, j, grapheOriginal->matrice[i][j].valuation);
+            if (grapheOriginal->matrice[i][j].arc && (!aretesARetirer || !aretesARetirer[i][j])) {
+                // Utiliser les noms des sommets pour ajouter les arêtes, si les indices changent
+                ajouterArc(sousGraphe, grapheOriginal->nomSommet[i], grapheOriginal->nomSommet[j], grapheOriginal->matrice[i][j].valuation);
             }
         }
     }
 
     return sousGraphe;
 }
-*/

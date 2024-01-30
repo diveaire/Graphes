@@ -5,6 +5,8 @@
 #include "header/djikstra.h"
 
 #define INFINI INT_MAX
+void afficherChemin(int parent[], int j,int source);
+
 
 // Trouver le sommet avec la distance minimale, parmi les sommets non inclus dans Solution
 int minDistance(int distance[], bool solution[], int taille) {
