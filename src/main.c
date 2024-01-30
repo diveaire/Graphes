@@ -10,7 +10,7 @@
 #include "header/circuit.h"
 #include "header/connexe.h"
 #include "header/complet.h"
-
+#include "header/djikstra.h"
 
 int main(void){
     srand(time(NULL));
@@ -80,6 +80,12 @@ int main(void){
         printf("Le graphe n'est pas complet\n");
     }
 
+    /* Chemin le plus cours */
+    Graphe * monGraphe6 = importerGrapheCSV("grapheDjikstra");
+    afficherGraphe(monGraphe6);
+    Dijkstra(monGraphe6,0,6);
+
+
 
     // Libération de la mémoire allouée pour les graphes
     freeGraphe(monGraphe);
@@ -87,6 +93,7 @@ int main(void){
     freeGraphe(monGraphe3);
     freeGraphe(monGraphe4);
     freeGraphe(monGraphe5);
+    freeGraphe(monGraphe6);
 
     return EXIT_SUCCESS;
 }

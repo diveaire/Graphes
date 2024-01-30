@@ -8,7 +8,7 @@ FILE_DIR = ./files
 HEADERS = ./src/header/*.h
 
 # Noms de fichiers sources
-SOURCES = $(SRC_DIR)/graphe.c $(SRC_DIR)/tableauGraphe.c $(SRC_DIR)/parcoursGraphe.c $(SRC_DIR)/afficheGraphe.c $(SRC_DIR)/serialization.c $(SRC_DIR)/main.c $(SRC_DIR)/outils.c $(SRC_DIR)/circuit.c $(SRC_DIR)/connexe.c $(SRC_DIR)/complet.c
+SOURCES = $(SRC_DIR)/graphe.c $(SRC_DIR)/tableauGraphe.c $(SRC_DIR)/parcoursGraphe.c $(SRC_DIR)/afficheGraphe.c $(SRC_DIR)/serialization.c $(SRC_DIR)/main.c $(SRC_DIR)/outils.c $(SRC_DIR)/circuit.c $(SRC_DIR)/connexe.c $(SRC_DIR)/complet.c $(SRC_DIR)/djikstra.c
 
 # Création automatique des noms des fichiers objets à partir des fichiers sources
 OBJECTS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SOURCES))

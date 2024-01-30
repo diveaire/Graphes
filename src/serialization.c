@@ -57,6 +57,7 @@ Graphe * importerGrapheCSV(char * nomFichier) {
             valuation = 0;  // ou une valeur par défaut de votre choix
         }
         ajouterArc(graphe, sommetA, sommetB, valuation);
+        printf("VALEUR AJOUTER ARC : SomA:%d SomB:%d Val:%d\n", sommetA, sommetB, valuation);
     }
 
     fclose(fichier);
