@@ -19,14 +19,6 @@ int minDistance(int distance[], bool solution[], int taille) {
     return min_index;
 }
 
-// Fonction pour afficher le chemin du sommet source au sommet destination
-void afficherChemin(int parent[], int j) {
-    if (parent[j] == -1) return;  // Si j est la source
-
-    afficherChemin(parent, parent[j]);
-    printf("%d ", j);
-}
-
 // Fonction pour trouver le chemin de poids minimal avec l'algorithme de Dijkstra
 void Dijkstra(Graphe *monGraphe, int sommetA, int sommetB) {
     int distance[monGraphe->tailleGraphe];  // contiendra la distance la plus courte de sommetA à i
@@ -63,8 +55,19 @@ void Dijkstra(Graphe *monGraphe, int sommetA, int sommetB) {
     if (distance[sommetB] == INFINI) {
         printf("%d, %d ne sont pas reliés\n", sommetA, sommetB);
     } else {
-        printf("Chemin le plus court entre %d et %d: [%d ", sommetA, sommetB, sommetA);
-        afficherChemin(parent, sommetB);
+        printf("Chemin le plus court entre %d et %d: [ ", sommetA, sommetB);
+        afficherChemin(parent, sommetB,sommetA);
         printf("]\n");
     }
+}
+
+// Fonction pour afficher le chemin du sommet source au sommet destination
+void afficherChemin(int parent[], int j,int source) {
+    if (parent[j] == -1){ 
+        printf("%d ", source);
+        return;  // Si j est la source
+    }    
+
+    afficherChemin(parent, parent[j],source);
+    printf("%d ", j);
 }
